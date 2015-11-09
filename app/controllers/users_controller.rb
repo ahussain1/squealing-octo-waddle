@@ -1,4 +1,9 @@
 class UsersController < ApplicationController
+
+	def index
+		@users = User.all
+	end 
+
 	def new
 		@user = User.new
 	end
@@ -9,7 +14,6 @@ class UsersController < ApplicationController
 		if @user.save
 			flash[:success] = "Welcome to the alpha blog #{@user.username}"
 			redirect_to articles_path 
-
 		else
 			render 'new'
 		end
@@ -28,6 +32,10 @@ class UsersController < ApplicationController
 			render 'edit'
 		end
 	end 
+
+	def show
+		@user = User.find(params[:id])
+	end
 
 	private
 
